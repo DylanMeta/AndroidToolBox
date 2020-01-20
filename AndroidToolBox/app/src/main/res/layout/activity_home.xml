@@ -24,7 +24,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline9"
         app:layout_constraintStart_toStartOf="@+id/guideline8"
         app:layout_constraintTop_toTopOf="@+id/guideline10"
-        app:srcCompat="@drawable/logoISEN" />
+        app:srcCompat="@drawable/logo_isen" />
 
     <TextView
         android:id="@+id/textViewHello"

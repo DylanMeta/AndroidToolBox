@@ -62,7 +62,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/guideline7"
-        app:srcCompat="@drawable/logoISEN" />
+        app:srcCompat="@drawable/logo_isen" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
