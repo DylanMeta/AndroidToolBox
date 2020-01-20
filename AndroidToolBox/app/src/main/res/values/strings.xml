@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">AndroidToolBox</string>
+    <string name="logo_ISEN">Logo ISEN</string>
+
+    <string name="text_intro">Connection</string>
+    <string name="edit_text_email">Email</string>
+    <string name="edit_text_password">Password</string>
+    <string name="button_validate">Validate</string>
+
+    <string name="text_hello">Hello</string>
+    <string name="button_life">Life cycle</string>
+    <string name="button_save">Save</string>
+    <string name="button_permissions">Permissions</string>
+    <string name="button_webservices">Webservices</string>
+
 </resources>
