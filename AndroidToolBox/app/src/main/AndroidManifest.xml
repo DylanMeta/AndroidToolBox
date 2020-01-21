@@ -21,8 +21,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="fr.isen.DylanMetans.androidtoolbox.HomeActivity">
-        </activity>
+        <activity android:name="fr.isen.DylanMetans.androidtoolbox.HomeActivity"></activity>
+        <activity android:name="fr.isen.DylanMetans.androidtoolbox.LifeCycleActivity"></activity>
 
     </application>
 

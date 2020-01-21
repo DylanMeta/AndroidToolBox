@@ -10,26 +10,33 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
 
+    val goodIdentifier = "admin"
+    val goodPassword = "123"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        var buttonValidate = findViewById<Button>(R.id.button_validate)
+        val buttonValidate = findViewById<Button>(R.id.button_validate)
+        val intentHomePage = Intent(this, HomeActivity::class.java)
+
 
         buttonValidate.setOnClickListener {
-            /*Show "toast" text
+            /*Show "toast" text */
+            if (canLog(editTextEmail.text.toString(),editTextPassword.text.toString()) ){
+                //Start activity
+                startActivity(intentHomePage)
 
-            if (editTextEmail.text.toString() != "admin" || editTextPassword.text.toString() != "123"){
-                Toast.makeText(this,"LOGIN ERRRRRRROR",Toast.LENGTH_LONG).show()
-
+                Toast.makeText(this, "Welcome, " + editTextEmail.text.toString(), Toast.LENGTH_LONG).show()
             }
 
             else {
-                Toast.makeText(this, editTextEmail.text.toString(), Toast.LENGTH_LONG).show()
-                //Start activity
-                val intentHomePage = Intent(this, HomeActivity::class.java)
-                startActivity(intentHomePage)
-            }*/
+                Toast.makeText(this,"LOGIN ERRRRRRROR",Toast.LENGTH_LONG).show()
+            }
         }
+    }
+
+    fun canLog(identifier:String, password:String) : Boolean {
+        return identifier == goodIdentifier && password == goodPassword
     }
 }
