@@ -2,7 +2,11 @@
   <dictionary name="Dylan">
     <words>
       <w>androidtoolbox</w>
+      <w>defaultid</w>
+      <w>defaultname</w>
+      <w>dylanmetans</w>
       <w>isen</w>
+      <w>kotlinsharedpreference</w>
       <w>metans</w>
     </words>
   </dictionary>

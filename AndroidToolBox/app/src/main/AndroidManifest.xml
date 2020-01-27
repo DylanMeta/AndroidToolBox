@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
-    package="fr.isen.DylanMetans.androidtoolbox">
+    package="fr.isen.dylanmetans.androidtoolbox">
 
     <dist:module dist:instant="true" />
 
@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="fr.isen.DylanMetans.androidtoolbox.LoginActivity">
+        <activity android:name="fr.isen.dylanmetans.androidtoolbox.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,8 +21,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="fr.isen.DylanMetans.androidtoolbox.HomeActivity"></activity>
-        <activity android:name="fr.isen.DylanMetans.androidtoolbox.LifeCycleActivity"></activity>
+        <activity android:name="fr.isen.dylanmetans.androidtoolbox.HomeActivity"></activity>
+        <activity android:name="fr.isen.dylanmetans.androidtoolbox.LifeCycleActivity"></activity>
 
     </application>
 

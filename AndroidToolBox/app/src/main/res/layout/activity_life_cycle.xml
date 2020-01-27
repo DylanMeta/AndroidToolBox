@@ -25,4 +25,47 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView" />
+
+    <fragment
+        android:id="@+id/fragment_one"
+        android:name="fr.isen.dylanmetans.androidtoolbox.FragmentDemo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.25"
+        tools:layout="@layout/activity_fragment_demo" />
+
+    <Button
+        android:id="@+id/buttonFragments"
+        android:layout_width="254dp"
+        android:layout_height="89dp"
+        android:layout_marginTop="94dp"
+        android:layout_marginBottom="118dp"
+        android:text="@string/text_life_cycle"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_two"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_one" />
+
+    <fragment
+        android:id="@+id/fragment_two"
+        android:name="fr.isen.dylanmetans.androidtoolbox.FragmentDemo2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_one"
+        app:layout_constraintVertical_bias="0.26"
+        tools:layout="@layout/activity_fragment_demo2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

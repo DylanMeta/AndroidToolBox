@@ -1,10 +1,9 @@
-package fr.isen.DylanMetans.androidtoolbox
+package fr.isen.dylanmetans.androidtoolbox
 
-import android.nfc.Tag
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_life_cycle.*
 
 
 class LifeCycleActivity : AppCompatActivity() {
@@ -13,6 +12,10 @@ class LifeCycleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_life_cycle)
+
+       supportFragmentManager.beginTransaction().add(
+            R.id.frag1, fragment_one).commit()
+
 
         Log.i("TAG","onCreate called")
     }
@@ -43,5 +46,8 @@ class LifeCycleActivity : AppCompatActivity() {
         super.onDestroy()
         Log.i("TAG", "onDestroy called")
     }
+
+//    transaction.remove(firstFragment)
+
 }
 

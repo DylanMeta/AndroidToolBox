@@ -1,4 +1,4 @@
-package fr.isen.DylanMetans.androidtoolbox
+package fr.isen.dylanmetans.androidtoolbox
 
 import org.junit.Test
 
