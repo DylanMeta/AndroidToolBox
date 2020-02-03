@@ -12,11 +12,24 @@
     <string name="button_save">Save</string>
     <string name="button_permissions">Permissions</string>
     <string name="button_webservices">Webservices</string>
+    <string name="button_disconnect">Log out</string>
+
 
     <string name="text_life_cycle">Activity Life Cycle</string>
 
     <string name="text_frag1">First fragment</string>
     <string name="text_frag2">Second fragment</string>
+    <string name="button_frag">Click/Swipe to change fragments</string>
+    <string name="onResume">Resume:</string>
+
+
+    <string name="text_form">Complete form</string>
+    <string name="text_form_name">Name</string>
+    <string name="text_form_firstname">First name</string>
+    <string name="text_form_birth_date">Date of birth</string>
+
+    <string name="text_form_view">View data</string>
+
 
 
 </resources>

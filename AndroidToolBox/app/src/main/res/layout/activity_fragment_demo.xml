@@ -1,17 +1,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/frag1"
+    android:id="@+id/fragment_one"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
     <TextView
-        android:id="@+id/textViewFrag1"
+        android:id="@+id/textViewLifeCycleFrag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/text_life_cycle"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/buttonFragments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="@string/text_frag1"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="@string/button_frag" />
 
 </RelativeLayout>

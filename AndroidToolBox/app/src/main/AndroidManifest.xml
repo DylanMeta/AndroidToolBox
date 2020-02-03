@@ -5,6 +5,10 @@
 
     <dist:module dist:instant="true" />
 
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,6 +27,10 @@
 
         <activity android:name="fr.isen.dylanmetans.androidtoolbox.HomeActivity"></activity>
         <activity android:name="fr.isen.dylanmetans.androidtoolbox.LifeCycleActivity"></activity>
+        <activity android:name="fr.isen.dylanmetans.androidtoolbox.SaveActivity"></activity>
+        <activity android:name="fr.isen.dylanmetans.androidtoolbox.PermissionsActivity"></activity>
+        <activity android:name="fr.isen.dylanmetans.androidtoolbox.WebServicesActivity"></activity>
+
 
     </application>
 

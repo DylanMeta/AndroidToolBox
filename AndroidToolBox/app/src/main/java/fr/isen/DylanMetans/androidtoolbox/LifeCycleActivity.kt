@@ -3,18 +3,18 @@ package fr.isen.dylanmetans.androidtoolbox
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import kotlinx.android.synthetic.main.activity_life_cycle.*
+import android.widget.TextView
+import android.widget.Toast
 
-
-class LifeCycleActivity : AppCompatActivity() {
+class LifeCycleActivity : AppCompatActivity(),OnFragmentInteractionListener  {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_life_cycle)
 
-       supportFragmentManager.beginTransaction().add(
-            R.id.frag1, fragment_one).commit()
+        val fragmentDemo = FragmentDemo()
+        supportFragmentManager.beginTransaction().add(R.id.fragmentContainer, fragmentDemo).commit()
 
 
         Log.i("TAG","onCreate called")
@@ -24,10 +24,12 @@ class LifeCycleActivity : AppCompatActivity() {
         super.onStart()
         Log.i("TAG", "onStart called")
     }
-    override fun onResume() {
+/*    override fun onResume() {
         super.onResume()
-        Log.i("TAG", "onResume called")
+        textViewLifeCycle.text = "onResume"
     }
+ */
+
     override fun onPause() {
         super.onPause()
         Log.i("TAG", "onPause called")
@@ -44,10 +46,17 @@ class LifeCycleActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.i("TAG", "onDestroy called")
+        Toast.makeText(
+            this,
+            "DESTROYED",
+            Toast.LENGTH_LONG
+        ).show()
     }
 
-//    transaction.remove(firstFragment)
+    override fun swipeFragment() {
+        val secondFragment = FragmentDemo2()
+        supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer,secondFragment).commit()
+    }
 
 }
 

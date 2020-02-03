@@ -10,10 +10,15 @@ import kotlinx.android.synthetic.main.activity_login.*
 import android.content.SharedPreferences
 
 
-
 class LoginActivity : AppCompatActivity() {
 
+    companion object {
+        const val kPassword = "kPassword"
+        const val kIdentifier = "kIdentifier"
+    }
+
     private val sharedPreferencesFile = "kotlinsharedpreference"
+    private var sharedPreferences: SharedPreferences? = null
 
     private val goodIdentifier = "admin"
     private val goodPassword = "123"
@@ -22,51 +27,63 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        /*var inputId = findViewById<EditText>(R.id.editTextEmail)
-        //val outputName = findViewById<TextView>(R.id.textViewShowName)
-        var inputPassword = findViewById<EditText>(R.id.editTextPassword)
-        //val outputId = findViewById<TextView>(R.id.textViewShowId)
-        */
-        val sharedPreferences: SharedPreferences = this.getSharedPreferences(sharedPreferencesFile,Context.MODE_PRIVATE)
+        sharedPreferences =
+            this.getSharedPreferences(sharedPreferencesFile, Context.MODE_PRIVATE)
 
 
         val buttonValidate = findViewById<Button>(R.id.button_validate)
-        val intentHomePage = Intent(this, HomeActivity::class.java)
-
         buttonValidate.setOnClickListener {
 
-            if (canLog(editTextEmail.text.toString(),editTextPassword.text.toString()) ){
+            val id: String = editTextEmail.text.toString()
+            val password: String = editTextPassword.text.toString()
 
-//Shared preferences creation ---------------------------------------------------------
-                val id : String = editTextEmail.text.toString()
-                val password : String = editTextPassword.text.toString()
-                val editor: SharedPreferences.Editor = sharedPreferences.edit()
+            if (loginCheck(id, password)) {
 
-                editor.putString("id_key",id)
-                editor.putString("password_key",password)
-                editor.apply()
-                editor.commit()
-
-                val sharedIdValue = sharedPreferences.getString("id_key","defaultid")
-                val sharedNameValue = sharedPreferences.getString("name_key","defaultname")
-
-                Toast.makeText(this, "Saved:Email" + sharedIdValue.toString() +"\nSaved:Password" + sharedNameValue.toString(), Toast.LENGTH_LONG).show()
-
+                //Shared preferences creation
+                savePreferences(id, password)
 
                 //Start new activity
-                intentHomePage.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                val intentHomePage = Intent(this, HomeActivity::class.java)
+                intentHomePage.flags =
+                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intentHomePage)
+                finish()
             }
+
             //Show "toast" error text
             else {
-
-
-                Toast.makeText(this,"LOGIN ERRRRRRROR",Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "LOGIN ERRRRRRROR", Toast.LENGTH_LONG).show()
             }
         }
     }
 
-    private fun canLog(identifier:String, password:String) : Boolean {
+    private fun loginCheck(identifier: String, password: String): Boolean {
+        if (identifier == goodIdentifier && password == goodPassword) {
+
+            val id = sharedPreferences?.getString(kIdentifier, null) ?: ""
+            val pass = sharedPreferences?.getString(kPassword, null) ?: ""
+            editTextEmail.setText(id)
+            editTextPassword.setText(pass)
+        }
         return identifier == goodIdentifier && password == goodPassword
     }
+
+    private fun savePreferences(identifier: String, password: String) {
+
+        val editor = sharedPreferences?.edit()
+        editor?.putString("id_key", identifier)
+        editor?.putString("password_key", password)
+        editor?.apply()
+        editor?.commit()
+
+        val sharedIdValue = sharedPreferences?.getString(kIdentifier, "defaultid")
+        val sharedPasswordValue = sharedPreferences?.getString(kPassword, "defaultname")
+
+        Toast.makeText(
+            this,
+            "Saved:Email" + sharedIdValue.toString() + "\nSaved:Password" + sharedPasswordValue.toString(),
+            Toast.LENGTH_LONG
+        ).show()
+    }
+
 }

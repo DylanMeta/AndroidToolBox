@@ -6,10 +6,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.activity_fragment_demo.*
 
 
 class FragmentDemo : Fragment() {
+
+    private var listener: OnFragmentInteractionListener? = null
+
 
     override fun onCreateView(inflater: LayoutInflater,
                                  container: ViewGroup?,
@@ -21,8 +26,15 @@ class FragmentDemo : Fragment() {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
+        if (context is OnFragmentInteractionListener) {
+            listener = context
+        } else {
+
+            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
+        }
         Log.i("Frag1 life cycle:", "onAttach called")
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i("Frag1 life cycle:", "onCreate called")
@@ -32,6 +44,9 @@ class FragmentDemo : Fragment() {
         Log.i("Frag1 life cycle:", "onActivityCreated called")
     }
     override fun onStart() {
+        buttonFragments.setOnClickListener {
+            listener?.swipeFragment()
+        }
         super.onStart()
         Log.i("Frag1 life cycle:", "onStart called")
     }
@@ -49,10 +64,16 @@ class FragmentDemo : Fragment() {
     }
     override fun onDestroyView() {
         super.onDestroyView()
-        Log.i("Frag1 life cycle:", "onDestroyView called")
+        Toast.makeText(
+            this.context,
+            "FRAGMENT DESTROYED",
+            Toast.LENGTH_LONG
+        ).show()
     }
     override fun onDetach() {
         super.onDetach()
+        listener = null
+
         Log.i("Frag1 life cycle:", "onDetach called")
     }
 }
