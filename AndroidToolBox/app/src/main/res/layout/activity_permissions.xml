@@ -14,15 +14,26 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        app:srcCompat="@android:drawable/ic_menu_camera"
+        android:contentDescription="@string/text_picture" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/contactRecyclerView"
-        android:layout_width="409dp"
-        android:layout_height="566dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pictureButton" />
+
+    <TextView
+        android:id="@+id/locationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/pictureButton"
+        app:layout_constraintStart_toEndOf="@+id/pictureButton"
+        app:layout_constraintTop_toTopOf="@+id/pictureButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

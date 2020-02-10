@@ -5,8 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageButton
+import kotlinx.android.synthetic.main.activity_home.*
 
 
 class HomeActivity : AppCompatActivity() {
@@ -17,39 +16,34 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        val buttonLifeCycle = findViewById<ImageButton>(R.id.imageButtonLifeCycle)
-        buttonLifeCycle.setOnClickListener {
+// 4 image button with their own activity attached
+        imageButtonLifeCycle.setOnClickListener {
             //Start activity
             val intentLifeCycle = Intent(this, LifeCycleActivity::class.java)
             startActivity(intentLifeCycle)
         }
 
-
-        val buttonPermission = findViewById<ImageButton>(R.id.imageButtonPermissions)
-        buttonPermission.setOnClickListener {
+        imageButtonPermissions.setOnClickListener {
             //Start activity
             val intentPermission = Intent(this, PermissionsActivity::class.java)
             startActivity(intentPermission)
         }
 
-        val buttonSave = findViewById<ImageButton>(R.id.imageButtonSave)
-        buttonSave.setOnClickListener {
+        imageButtonSave.setOnClickListener {
             //Start activity
             val intentSave = Intent(this, SaveActivity::class.java)
             startActivity(intentSave)
         }
 
-
-        val buttonWebServices = findViewById<ImageButton>(R.id.imageButtonWebservices)
-        buttonWebServices.setOnClickListener {
+        imageButtonWebservices.setOnClickListener {
             //Start activity
             val intentWebServices = Intent(this, WebServicesActivity::class.java)
             startActivity(intentWebServices)
         }
 
 
-        val buttonDisconnect = findViewById<Button>(R.id.button_disconnect)
-        buttonDisconnect.setOnClickListener {
+// Disconnect and forget the mail and password given
+        button_disconnect.setOnClickListener {
             //Shared preferences delete ---------------------------------------------------------
             val sharedPreferences: SharedPreferences = getSharedPreferences(sharedPreferencesFile, Context.MODE_PRIVATE)
             val editor = sharedPreferences.edit()

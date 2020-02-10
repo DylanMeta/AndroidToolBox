@@ -30,14 +30,26 @@ class SaveActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form)
 
-
         button_submit.setOnClickListener {
             submit()
         }
 
         button_view.setOnClickListener {
-            // TEST EXISTENCE AVANT LE SAVE
-            view()
+
+            if (firstName.text.toString().isNotEmpty() &&
+                name.text.toString().isNotEmpty() &&
+                birthDay.text.toString().isNotEmpty()) {
+
+                view()
+            }
+
+            else{
+                Toast.makeText(
+                    this,
+                    "All field must be completed",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
 
         birthDay.setOnFocusChangeListener {_, hasFocus ->
@@ -54,7 +66,7 @@ class SaveActivity : AppCompatActivity() {
             }
         }
     }
-
+    
     private fun submit() {
         if (firstName.text.toString().isNotEmpty() &&
             name.text.toString().isNotEmpty() &&

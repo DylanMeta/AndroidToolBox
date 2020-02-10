@@ -199,7 +199,7 @@
         android:id="@+id/button_disconnect"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorPrimary"
+        android:background="@color/colorPrimary"
         android:text="@string/button_disconnect"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"

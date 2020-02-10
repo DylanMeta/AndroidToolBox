@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
-import android.widget.Button
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_login.*
 import android.content.SharedPreferences
@@ -27,12 +26,9 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        sharedPreferences =
-            this.getSharedPreferences(sharedPreferencesFile, Context.MODE_PRIVATE)
+        sharedPreferences = this.getSharedPreferences(sharedPreferencesFile, Context.MODE_PRIVATE)
 
-
-        val buttonValidate = findViewById<Button>(R.id.button_validate)
-        buttonValidate.setOnClickListener {
+        button_validate.setOnClickListener {
 
             val id: String = editTextEmail.text.toString()
             val password: String = editTextPassword.text.toString()
@@ -44,8 +40,7 @@ class LoginActivity : AppCompatActivity() {
 
                 //Start new activity
                 val intentHomePage = Intent(this, HomeActivity::class.java)
-                intentHomePage.flags =
-                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                intentHomePage.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intentHomePage)
                 finish()
             }
@@ -76,12 +71,12 @@ class LoginActivity : AppCompatActivity() {
         editor?.apply()
         editor?.commit()
 
-        val sharedIdValue = sharedPreferences?.getString(kIdentifier, "defaultid")
-        val sharedPasswordValue = sharedPreferences?.getString(kPassword, "defaultname")
+        val sharedIdValue = sharedPreferences?.getString(kIdentifier, "default_id")
+        val sharedPasswordValue = sharedPreferences?.getString(kPassword, "default_password")
 
         Toast.makeText(
             this,
-            "Saved:Email" + sharedIdValue.toString() + "\nSaved:Password" + sharedPasswordValue.toString(),
+            "Saved name as " + sharedIdValue.toString() + "\nSaved password as " + sharedPasswordValue.toString(),
             Toast.LENGTH_LONG
         ).show()
     }

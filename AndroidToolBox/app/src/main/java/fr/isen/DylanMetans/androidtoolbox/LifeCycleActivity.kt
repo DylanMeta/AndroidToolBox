@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_life_cycle.*
 
 class LifeCycleActivity : AppCompatActivity(),OnFragmentInteractionListener  {
 
@@ -15,20 +16,18 @@ class LifeCycleActivity : AppCompatActivity(),OnFragmentInteractionListener  {
 
         val fragmentDemo = FragmentDemo()
         supportFragmentManager.beginTransaction().add(R.id.fragmentContainer, fragmentDemo).commit()
-
-
         Log.i("TAG","onCreate called")
+
     }
 
     override fun onStart() {
         super.onStart()
         Log.i("TAG", "onStart called")
     }
-/*    override fun onResume() {
+    override fun onResume() {
         super.onResume()
         textViewLifeCycle.text = "onResume"
     }
- */
 
     override fun onPause() {
         super.onPause()

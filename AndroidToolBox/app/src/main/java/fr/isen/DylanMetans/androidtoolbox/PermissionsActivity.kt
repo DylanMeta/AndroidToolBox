@@ -1,40 +1,39 @@
 package fr.isen.dylanmetans.androidtoolbox
 
-import android.R.attr
-import android.R.attr.bitmap
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.net.Uri
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.provider.MediaStore
-import android.util.Log
-import android.widget.Adapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_permissions.*
-import java.io.File
-import java.security.acl.Permission
-import java.util.jar.Manifest
 
+class PermissionsActivity : AppCompatActivity(), LocationListener {
 
-class PermissionsActivity : AppCompatActivity() {
+    private lateinit var locationManager: LocationManager
 
     companion object {
-        val pictureRequestCode = 1
-        val contactPermissionRequestCode = 2
+        const val pictureRequestCode = 1
+        const val contactPermissionRequestCode = 2
+        const val gpsPermissionRequestCode = 3
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_permissions)
+
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
         pictureButton.setOnClickListener {
             onChangePhoto()
@@ -43,9 +42,13 @@ class PermissionsActivity : AppCompatActivity() {
         requestPermission(android.Manifest.permission.READ_CONTACTS, contactPermissionRequestCode) {
             readContacts()
         }
+
+        requestPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION, gpsPermissionRequestCode) {
+            startGPS()
+        }
     }
 
-    fun onChangePhoto() {
+    private fun onChangePhoto() {
         val galleryIntent = Intent(Intent.ACTION_PICK)
         galleryIntent.type = "image/*"
 
@@ -53,10 +56,10 @@ class PermissionsActivity : AppCompatActivity() {
 
         val intentChooser = Intent.createChooser(galleryIntent, "Choose your picture library")
         intentChooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(cameraIntent))
-        startActivityForResult(intentChooser, PermissionsActivity.pictureRequestCode)
+        startActivityForResult(intentChooser, pictureRequestCode)
     }
 
-    fun readContacts() {
+    private fun readContacts() {
         val contactList = ArrayList<ContactModel>()
         val contacts = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null)
         while(contacts?.moveToNext() ?: false) {
@@ -69,14 +72,33 @@ class PermissionsActivity : AppCompatActivity() {
         contactRecyclerView.adapter = ContactsAdapter(contactList)
     }
 
-    fun requestPermission(permissionToRequest: String, requestCode: Int, handler: ()-> Unit) {
+    @SuppressLint("MissingPermission")
+    private fun startGPS() {
+        locationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, this, null)
+        val location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+        location?.let {
+            refreshPositionUI(it)
+        }
+    }
+
+    private fun refreshPositionUI(location: Location) {
+        locationTextView.text = "latitude : ${location.latitude} \nlongitude : ${location.longitude}"
+    }
+
+    private fun requestPermission(permissionToRequest: String, requestCode: Int, handler: ()-> Unit) {
         if(ContextCompat.checkSelfPermission(this, permissionToRequest) != PackageManager.PERMISSION_GRANTED) {
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, permissionToRequest)) {
-                //display toast
-            } else {
+                Toast.makeText(
+                    this,
+                    "Permission Request",
+                    Toast.LENGTH_LONG
+                ).show()            }
+            else
+            {
                 ActivityCompat.requestPermissions(this, arrayOf(permissionToRequest), requestCode)
             }
-        } else {
+        }
+        else {
             handler()
         }
     }
@@ -99,7 +121,7 @@ class PermissionsActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == pictureRequestCode &&
-                resultCode == Activity.RESULT_OK) {
+            resultCode == Activity.RESULT_OK) {
             if(data?.data != null) { // Gallery
                 pictureButton.setImageURI(data.data)
             } else { // Camera
@@ -111,4 +133,13 @@ class PermissionsActivity : AppCompatActivity() {
         }
     }
 
+    override fun onLocationChanged(location: Location?) {
+        location?.let {
+            refreshPositionUI(it)
+        }
+    }
+
+    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
+    override fun onProviderEnabled(provider: String?) {}
+    override fun onProviderDisabled(provider: String?) {}
 }

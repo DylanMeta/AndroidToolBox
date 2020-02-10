@@ -19,7 +19,7 @@
 
     <string name="text_frag1">First fragment</string>
     <string name="text_frag2">Second fragment</string>
-    <string name="button_frag">Click/Swipe to change fragments</string>
+    <string name="button_frag">Click to change fragments</string>
     <string name="onResume">Resume:</string>
 
 
@@ -30,6 +30,7 @@
 
     <string name="text_form_view">View data</string>
 
-
+    <string name="text_picture">View data</string>
+    <string name="text_avatar">Profile photo</string>
 
 </resources>

@@ -15,7 +15,6 @@ class FragmentDemo : Fragment() {
 
     private var listener: OnFragmentInteractionListener? = null
 
-
     override fun onCreateView(inflater: LayoutInflater,
                                  container: ViewGroup?,
                                  savedInstanceState: Bundle?): View? {
@@ -24,6 +23,7 @@ class FragmentDemo : Fragment() {
         return inflater.inflate(R.layout.activity_fragment_demo, container, false)
     }
 
+// Fragment listener
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
@@ -35,6 +35,7 @@ class FragmentDemo : Fragment() {
         Log.i("Frag1 life cycle:", "onAttach called")
     }
 
+// FRAGMENT LIFECYCLE
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i("Frag1 life cycle:", "onCreate called")
@@ -52,7 +53,7 @@ class FragmentDemo : Fragment() {
     }
     override fun onResume() {
         super.onResume()
-        Log.i("Frag1 life cycle:", "onResume called")
+        textViewLifeCycleFrag.text = ("@string/onResume")
     }
     override fun onPause() {
         super.onPause()
