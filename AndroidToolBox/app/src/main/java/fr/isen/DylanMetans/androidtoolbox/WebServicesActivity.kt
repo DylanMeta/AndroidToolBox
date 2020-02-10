@@ -33,13 +33,18 @@ class WebServicesActivity: AppCompatActivity() {
                  val gsonFile = Gson()
                  val result = gsonFile.fromJson(it,RandomUserModel::class.java)
 
-                 result.results?.forEach() {
-                     textPersonName.text = it.name?.first
-                     textPersonName2.text = it.name?.last
-                     textViewAdress.text = it.location?.street?.name
-                     textMail.text = it.email
-                     Picasso.get().load(it.picture?.medium).into(imageViewAvatar)
-                     userList.add(it)
+                 result.results?.let{
+                     it.forEach() {
+                         textPersonName.text = it.name?.first
+                         textPersonName2.text = it.name?.last
+                         textViewAdress.text = it.location?.street?.name
+                         textMail.text = it.email
+                         Picasso.get().load(it.picture?.medium).into(imageViewAvatar)
+                         userList.add(it)
+
+                         contactRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+                         contactRecyclerView.adapter = UserAdapter(userList)
+                     }
                  }
         },
         Response.ErrorListener {
@@ -48,12 +53,5 @@ class WebServicesActivity: AppCompatActivity() {
 
  // Add the request to the RequestQueue.
         queue.add(request)
-
-        contactRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        contactRecyclerView.adapter = UserAdapter(userList)
-
-
     }
-
-
 }
